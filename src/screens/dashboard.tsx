@@ -4,11 +4,11 @@ import { Calendar, DollarSign, Search } from "lucide-react";
 import GraphComponent from "../components/graphComponent";
 import RecentExpenses from "../components/recentExpenses";
 import Table from "../components/tableComponent";
+import Select from "../components/select";
 
 function Dashboard() {
   return (
     <div className="w-[70%] mx-auto min-h-[100vh]">
-      <Header />
       <div className="flex w-full justify-between gap-x-[40px] mt-[40px]">
         <Tab>
           <div className="w-full flex justify-between mb-[25px] ">
@@ -59,23 +59,40 @@ function Dashboard() {
           </div>
         </Tab>
       </div>
-      <Tab>
-        <div className="mb-[30px]">
-          <p className="text-[18px] font-semibold">All Expenses</p>
-          <p className="text-[14px] text-[#00000080]">
-            Manage and view all your expenses
-          </p>
-        </div>
-        <div className="flex items-center py-[5px] bg-[rgba(128,128,128,0.4)] rounded-[5px] gap-x-[5px] px-[10px]">
-          <Search size={14} />
-          <input
-            type="text"
-            className="w-[80%] outline-none"
-            placeholder="Search expenses..."
-          />
-        </div>
-        <Table />
-      </Tab>
+      <div className="mt-[40px]">
+        <Tab>
+          <div className="mb-[20px]">
+            <p className="text-[18px] font-semibold">All Expenses</p>
+            <p className="text-[14px] text-[#00000080]">
+              Manage and view all your expenses
+            </p>
+          </div>
+          <div className="flex gap-x-[20px] mb-[20px]">
+            <div className="flex flex-1 w-[80%] items-center py-[5px] bg-[rgba(128,128,128,0.2)] rounded-[5px] gap-x-[5px] px-[10px]">
+              <Search size={14} />
+              <input
+                type="text"
+                className="w-[80%] outline-none"
+                placeholder="Search expenses..."
+              />
+            </div>
+            <div className="w-[20%]">
+              <Select
+                options={[
+                  "All Catgories",
+                  "Food",
+                  "Transportation",
+                  "Entertainment",
+                  "Shopping",
+                  "Utilities",
+                  "Health",
+                ]}
+              />
+            </div>
+          </div>
+          <Table />
+        </Tab>
+      </div>
     </div>
   );
 }
