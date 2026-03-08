@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../components/header";
 import Tab from "../components/tab";
 import { Calendar, DollarSign } from "lucide-react";
+import GraphComponent from "../components/graphComponent";
 
 function Dashboard() {
   return (
@@ -36,6 +37,30 @@ function Dashboard() {
           <div>
             <p className="text-[24px]">$83.48</p>
             <p className="text-[12px]">Per transactions</p>
+          </div>
+        </Tab>
+      </div>
+      <div className="flex gap-x-[20px] mt-[40px]">
+        <Tab>
+          <div>
+            <div>
+              <p className="text-[18px]">Monthly Spending Distribution</p>
+              <p className="text-[14px] text-[#00000070]">
+                Percentage breakdown by category each month
+              </p>
+            </div>
+            <GraphComponent />
+          </div>
+        </Tab>
+        <Tab>
+          <div>
+            <div>
+              <p className="text-[18px]">Monthly Spending Distribution</p>
+              <p className="text-[14px] text-[#00000070]">
+                Percentage breakdown by category each month
+              </p>
+            </div>
+            {/* <GraphComponent /> */}
           </div>
         </Tab>
       </div>
