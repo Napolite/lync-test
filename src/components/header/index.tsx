@@ -3,7 +3,10 @@ import { Plus } from "lucide-react";
 function Header() {
   return (
     <div className="w-full justify-between flex justify-between pt-[20px]">
-      <div className="text-[24px]">Expense Tracker</div>
+      <div className="">
+        <p className="text-[24px] font-semibold">Expense Tracker</p>
+        <p>Track and manage your financial expenses</p>
+      </div>
       <div>
         <button className="w-[157px] h-[40px] bg-[#000000] rounded-[8px] flex items-center justify-between px-[15px]">
           <Plus color="#ffffff" size={18} />
