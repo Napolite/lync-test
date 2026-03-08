@@ -4,6 +4,7 @@ import Tab from "../components/tab";
 import { Calendar, DollarSign } from "lucide-react";
 import GraphComponent from "../components/graphComponent";
 import RecentExpenses from "../components/recentExpenses";
+import Table from "../components/tableComponent";
 
 function Dashboard() {
   return (
@@ -59,6 +60,7 @@ function Dashboard() {
           </div>
         </Tab>
       </div>
+      <Table />
     </div>
   );
 }
