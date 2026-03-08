@@ -31,7 +31,7 @@ const Select = ({
           >
             <div className="my-[5px] px-[2.5px] hover:bg-[rgba(128,128,128,0.2)] hover:rounded-[8px]">
               <div
-                className="py-[10px] text-left bg-[red] px-[10px] rounded-[8px] flex items-center justify-between"
+                className="py-[8px] text-left bg-[red] px-[10px] rounded-[8px] flex items-center justify-between"
                 style={{
                   backgroundColor:
                     selection === opt
