@@ -3,6 +3,7 @@ import Header from "../components/header";
 import Tab from "../components/tab";
 import { Calendar, DollarSign } from "lucide-react";
 import GraphComponent from "../components/graphComponent";
+import RecentExpenses from "../components/recentExpenses";
 
 function Dashboard() {
   return (
@@ -54,13 +55,7 @@ function Dashboard() {
         </Tab>
         <Tab>
           <div>
-            <div>
-              <p className="text-[18px]">Monthly Spending Distribution</p>
-              <p className="text-[14px] text-[#00000070]">
-                Percentage breakdown by category each month
-              </p>
-            </div>
-            {/* <GraphComponent /> */}
+            <RecentExpenses />
           </div>
         </Tab>
       </div>
