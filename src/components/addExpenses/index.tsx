@@ -1,8 +1,13 @@
 import { X } from "lucide-react";
 
 import Select from "../select";
+import type { SetStateAction } from "react";
 
-function AddExpenses() {
+function AddExpenses({
+  closeModal,
+}: {
+  closeModal: () => SetStateAction<any>;
+}) {
   return (
     <div className="fixed w-full min-h-full bg-[#00000080] top-0 left-0 flex items-center justify-center overflow-auto">
       <div className="bg-[white] w-[500px] min-h-[500px] px-[23px] py-[20px] rounded-[20px]">
@@ -14,7 +19,7 @@ function AddExpenses() {
             </p>
           </div>
           <div>
-            <X />
+            <X onClick={closeModal} />
           </div>
         </div>
         <div className="flex flex-col gap-y-[20px]">
