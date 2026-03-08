@@ -1,5 +1,4 @@
-import { Edit, Pen, Trash, Trash2 } from "lucide-react";
-import React from "react";
+import { Edit, Trash2 } from "lucide-react";
 
 function Row() {
   return (

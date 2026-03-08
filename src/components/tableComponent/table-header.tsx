@@ -1,5 +1,3 @@
-import React from "react";
-
 function TableHeader() {
   return (
     <div className="text-[16px] font-600 flex w-full justify-between items-center px-[10px]">
