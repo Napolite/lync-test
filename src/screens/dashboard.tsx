@@ -1,7 +1,6 @@
-import React from "react";
 import Header from "../components/header";
 import Tab from "../components/tab";
-import { Calendar, DollarSign } from "lucide-react";
+import { Calendar, DollarSign, Search } from "lucide-react";
 import GraphComponent from "../components/graphComponent";
 import RecentExpenses from "../components/recentExpenses";
 import Table from "../components/tableComponent";
@@ -60,7 +59,23 @@ function Dashboard() {
           </div>
         </Tab>
       </div>
-      <Table />
+      <Tab>
+        <div className="mb-[30px]">
+          <p className="text-[18px] font-semibold">All Expenses</p>
+          <p className="text-[14px] text-[#00000080]">
+            Manage and view all your expenses
+          </p>
+        </div>
+        <div className="flex items-center py-[5px] bg-[rgba(128,128,128,0.4)] rounded-[5px] gap-x-[5px] px-[10px]">
+          <Search size={14} />
+          <input
+            type="text"
+            className="w-[80%] outline-none"
+            placeholder="Search expenses..."
+          />
+        </div>
+        <Table />
+      </Tab>
     </div>
   );
 }
