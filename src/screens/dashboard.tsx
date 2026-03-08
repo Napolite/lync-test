@@ -1,4 +1,3 @@
-import Header from "../components/header";
 import Tab from "../components/tab";
 import { Calendar, DollarSign, Search } from "lucide-react";
 import GraphComponent from "../components/graphComponent";
