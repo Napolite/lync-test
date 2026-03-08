@@ -54,6 +54,14 @@ function AddExpenses() {
             />
           </div>
         </div>
+        <div className="flex justify-end gap-x-[20px] mt-[30px]">
+          <button className="px-[10px] py-[8px] rounded-[10px] bg-[#ffffff] ring">
+            Cancel
+          </button>
+          <button className="px-[10px] py-[8px] rounded-[10px] bg-[#000000] text-[#ffffff]">
+            Add Expenses
+          </button>
+        </div>
       </div>
     </div>
   );
