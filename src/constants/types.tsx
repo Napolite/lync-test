@@ -3,4 +3,5 @@ export interface ExpensesDataType {
   description: string;
   amount: number;
   category: string;
+  id: number;
 }

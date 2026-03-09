@@ -4,7 +4,7 @@ import GraphComponent from "../components/graphComponent";
 import RecentExpenses from "../components/recentExpenses";
 import Table from "../components/tableComponent";
 import Select from "../components/select";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useServices from "../database-services/useServices";
 import type { ExpensesDataType } from "../constants/types";
 

@@ -26,7 +26,11 @@ function useServices() {
     return id;
   };
 
-  return { addExpenses, expensesData, totalExpenses };
+  const deleteExpenses = async (id: number) => {
+    db.expenses.delete(id);
+  };
+
+  return { addExpenses, expensesData, totalExpenses, deleteExpenses };
 }
 
 export default useServices;
