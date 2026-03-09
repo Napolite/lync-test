@@ -4,11 +4,10 @@ import { BiCaretDown } from "react-icons/bi";
 
 const Select = ({
   options,
+  onSelect,
 }: {
   options?: string[];
-  type?: "dropdown" | "calendar";
-  label?: string;
-  selectedDate?: string | Date;
+  onSelect: (val: any) => any;
 }) => {
   const [selection, setSelection] = useState(options?.[0]);
 

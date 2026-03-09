@@ -1,13 +1,22 @@
 import { X } from "lucide-react";
 
 import Select from "../select";
-import type { SetStateAction } from "react";
+import { useState, type SetStateAction } from "react";
+
+import useServices from "../../database-services/useServices";
 
 function AddExpenses({
   closeModal,
 }: {
   closeModal: () => SetStateAction<any>;
 }) {
+  const { addExpenses } = useServices();
+  const [formValues, setFormValues] = useState<{
+    amount: number;
+    category: string;
+    description: string;
+    date: string | any;
+  }>({ amount: 0, category: "", description: "", date: "" });
   return (
     <div className="fixed w-full min-h-full bg-[#00000080] top-0 left-0 flex items-center justify-center overflow-auto">
       <div className="bg-[white] w-[500px] min-h-[500px] px-[23px] py-[20px] rounded-[20px]">
@@ -44,6 +53,9 @@ function AddExpenses({
                 "Travel",
                 "Other",
               ]}
+              onSelect={(value) => {
+                setFormValues((prev) => ({ ...prev, category: value }));
+              }}
             />
           </div>
           <div className="flex flex-col gap-y-[5px]">
@@ -63,7 +75,12 @@ function AddExpenses({
           <button className="px-[10px] py-[8px] rounded-[10px] bg-[#ffffff] ring">
             Cancel
           </button>
-          <button className="px-[10px] py-[8px] rounded-[10px] bg-[#000000] text-[#ffffff]">
+          <button
+            className="px-[10px] py-[8px] rounded-[10px] bg-[#000000] text-[#ffffff]"
+            onClick={() => {
+              addExpenses(formValues);
+            }}
+          >
             Add Expenses
           </button>
         </div>
