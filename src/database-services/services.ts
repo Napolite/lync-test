@@ -10,11 +10,13 @@ interface Expenses {
 
 class MySubClassedDexie extends Dexie {
   expenses!: EntityTable<Expenses, "id">;
+  budget!: EntityTable<{ id: number; amount: number }, "id">;
 
   constructor() {
     super("Expenses");
     this.version(1).stores({
       expenses: "++id, date, description, category, amount",
+      budget: "id",
     });
   }
 }

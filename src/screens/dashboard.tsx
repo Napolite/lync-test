@@ -9,12 +9,7 @@ import useServices from "../database-services/useServices";
 import type { ExpensesDataType } from "../constants/types";
 
 function Dashboard() {
-  const {
-    expensesData,
-    totalExpenses,
-    totalMonthlyExpenses,
-    totalMonthlyExpensesQ,
-  } = useServices();
+  const { expensesData, totalExpenses, totalMonthlyExpenses } = useServices();
   const [filter, setFilter] = useState("");
   const [query, setQuery] = useState("");
   return (
@@ -39,9 +34,7 @@ function Dashboard() {
           </div>
           <div>
             <p className="text-[24px]">${totalMonthlyExpenses}</p>
-            <p className="text-[12px]">
-              {totalMonthlyExpensesQ?.length} transactions this month
-            </p>
+            <p className="text-[12px]">$100 more than your budget</p>
           </div>
         </Tab>
         <Tab>
@@ -51,7 +44,7 @@ function Dashboard() {
           </div>
           <div>
             <p className="text-[24px]">
-              ${((totalExpenses || 1) / (expensesData?.length || 1)).toFixed(2)}
+              ${((totalExpenses || 0) / (expensesData?.length || 1)).toFixed(2)}
             </p>
             <p className="text-[12px]">Per transactions</p>
           </div>

@@ -26,13 +26,7 @@ function useServices() {
     ),
   );
 
-  const totalMonthlyExpensesQ = useLiveQuery(() =>
-    db?.expenses?.toArray()?.then((data) =>
-      data?.filter((d) => {
-        return new Date(d?.date)?.getMonth() === new Date()?.getMonth();
-      }),
-    ),
-  );
+  const budget = useLiveQuery(() => db.budget.get(1));
 
   //added this line for clarity
 
@@ -56,14 +50,19 @@ function useServices() {
     });
   };
 
+  const updateBudget = async (amount: number) => {
+    await db.budget.put({ id: 1, amount: amount });
+  };
+
   return {
     addExpenses,
     expensesData,
     totalExpenses,
     deleteExpenses,
     totalMonthlyExpenses,
-    totalMonthlyExpensesQ,
     updateExpense,
+    updateBudget,
+    budget,
   };
 }
 
