@@ -4,14 +4,14 @@ import GraphComponent from "../components/graphComponent";
 import RecentExpenses from "../components/recentExpenses";
 import Table from "../components/tableComponent";
 import Select from "../components/select";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useServices from "../database-services/useServices";
+import type { ExpensesDataType } from "../constants/types";
 
 function Dashboard() {
   const { expensesData, totalExpenses } = useServices();
-  useEffect(() => {
-    console.log(totalExpenses);
-  }, [expensesData]);
+  const [filter, setFilter] = useState("");
+  const [query, setQuery] = useState("");
   return (
     <div className="w-[70%] mx-auto min-h-[100vh]">
       <div className="flex w-full justify-between gap-x-[40px] mt-[40px]">
@@ -83,12 +83,15 @@ function Dashboard() {
                 type="text"
                 className="w-[80%] outline-none"
                 placeholder="Search expenses..."
+                onChange={(e) => {
+                  setQuery(e?.target?.value);
+                }}
               />
             </div>
             <div className="w-[20%]">
               <Select
                 options={[
-                  "All Catgories",
+                  "All Categories",
                   "Food",
                   "Transportation",
                   "Entertainment",
@@ -96,10 +99,25 @@ function Dashboard() {
                   "Utilities",
                   "Health",
                 ]}
+                onSelect={(val) =>
+                  val === "All Categories" ? setFilter("") : setFilter(val)
+                }
               />
             </div>
           </div>
-          <Table />
+          <Table
+            data={
+              expensesData
+                ?.filter((data) => (filter ? data?.category === filter : data))
+                .filter((data) =>
+                  query
+                    ? data?.description
+                        ?.toLowerCase()
+                        ?.includes(query?.toLowerCase())
+                    : data,
+                ) as ExpensesDataType[]
+            }
+          />
         </Tab>
       </div>
     </div>

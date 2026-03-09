@@ -2,7 +2,7 @@ import type { ExpensesDataType } from "../../constants/types";
 import { addColorToData } from "../../helpers/composeDate";
 import Tab from "../tab";
 
-const Badge = ({ color, text }: { color: string; text: string }) => {
+export const Badge = ({ color, text }: { color: string; text: string }) => {
   return (
     <div
       style={{ background: `${color}10`, color: color }}
