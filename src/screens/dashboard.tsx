@@ -9,7 +9,12 @@ import useServices from "../database-services/useServices";
 import type { ExpensesDataType } from "../constants/types";
 
 function Dashboard() {
-  const { expensesData, totalExpenses } = useServices();
+  const {
+    expensesData,
+    totalExpenses,
+    totalMonthlyExpenses,
+    totalMonthlyExpensesQ,
+  } = useServices();
   const [filter, setFilter] = useState("");
   const [query, setQuery] = useState("");
   return (
@@ -33,8 +38,10 @@ function Dashboard() {
             <Calendar size={18} />
           </div>
           <div>
-            <p className="text-[24px]">$0.00</p>
-            <p className="text-[12px]">0 transactions this month</p>
+            <p className="text-[24px]">${totalMonthlyExpenses}</p>
+            <p className="text-[12px]">
+              {totalMonthlyExpensesQ?.length} transactions this month
+            </p>
           </div>
         </Tab>
         <Tab>
@@ -59,7 +66,7 @@ function Dashboard() {
                 Percentage breakdown by category each month
               </p>
             </div>
-            <GraphComponent />
+            <GraphComponent data={expensesData as ExpensesDataType[]} />
           </div>
         </Tab>
         <Tab>

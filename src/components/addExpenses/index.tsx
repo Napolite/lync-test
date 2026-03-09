@@ -99,9 +99,7 @@ function AddExpenses({
           <button
             className="px-[10px] py-[8px] rounded-[10px] bg-[#000000] text-[#ffffff]"
             onClick={() => {
-              addExpenses(formValues).then(() => {
-                console.log("expenses have been added to database");
-              });
+              addExpenses(formValues).then(() => {});
             }}
           >
             Add Expenses
