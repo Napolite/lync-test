@@ -1,6 +1,5 @@
-import { CheckIcon } from "lucide-react";
+import { CheckIcon, ChevronDown } from "lucide-react";
 import { useState } from "react";
-import { BiCaretDown } from "react-icons/bi";
 
 const Select = ({
   options,
@@ -58,7 +57,7 @@ const Select = ({
         onClick={() => setDropOpen(!dropOpen)}
       >
         <p className="p-[16px]">{selection}</p>
-        <BiCaretDown />
+        <ChevronDown size={16} />
       </button>
       {dropOpen && renderDropDown()}
     </div>
