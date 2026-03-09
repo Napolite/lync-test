@@ -50,6 +50,12 @@ function useServices() {
     db.expenses.delete(id);
   };
 
+  const updateExpense = async (id: number, data: any) => {
+    await db.expenses.update(id, {
+      ...data,
+    });
+  };
+
   return {
     addExpenses,
     expensesData,
@@ -57,6 +63,7 @@ function useServices() {
     deleteExpenses,
     totalMonthlyExpenses,
     totalMonthlyExpensesQ,
+    updateExpense,
   };
 }
 
