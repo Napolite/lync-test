@@ -17,6 +17,8 @@ function AddExpenses({
 }) {
   const { addExpenses, updateExpense } = useServices();
 
+  const [hasErr, setHasErr] = useState<string[]>([]);
+
   const [formValues, setFormValues] = useState<{
     amount: number | null;
     category: string;
@@ -48,14 +50,18 @@ function AddExpenses({
             <input
               type="number"
               className="w-full h-[50px] bg-[rgba(128,128,128,0.2)] rounded-[10px] px-[10px]"
-              onChange={(e) =>
+              onChange={(e) => {
                 setFormValues({
                   ...formValues,
                   amount: Number(e.target.value),
-                })
-              }
+                });
+                setHasErr(hasErr?.filter((a) => a !== "amount"));
+              }}
               value={formValues?.amount || undefined}
             />
+            {hasErr?.includes("amount") && (
+              <p className="text-[red]">Amount cannot be empty</p>
+            )}
           </div>
           <div className="flex flex-col gap-y-[5px]">
             <label className="">Category</label>
@@ -81,14 +87,18 @@ function AddExpenses({
             <label className="">Description</label>
             <textarea
               className="w-full h-[75px] bg-[rgba(128,128,128,0.2)] rounded-[10px] px-[10px] py-[10px]"
-              onChange={(e) =>
+              onChange={(e) => {
                 setFormValues({
                   ...formValues,
                   description: e.target.value,
-                })
-              }
+                });
+                setHasErr(hasErr?.filter((a) => a !== "description"));
+              }}
               value={formValues?.description}
             />
+            {hasErr?.includes("description") && (
+              <p className="text-[red]">Description cannot be empty</p>
+            )}
           </div>
           <div className="flex flex-col gap-y-[5px]">
             <label className="">Date</label>
@@ -96,14 +106,18 @@ function AddExpenses({
               aria-label="Date"
               type="date"
               className="w-full h-[50px] bg-[rgba(128,128,128,0.2)] rounded-[10px] px-[10px]"
-              onChange={(e) =>
+              onChange={(e) => {
                 setFormValues({
                   ...formValues,
                   date: e.target.value,
-                })
-              }
+                });
+                setHasErr(hasErr?.filter((a) => a !== "date"));
+              }}
               value={formValues?.date}
             />
+            {hasErr?.includes("date") && (
+              <p className="text-[red]">Date cannot be empty</p>
+            )}
           </div>
         </div>
         <div className="flex justify-end gap-x-[20px] mt-[30px]">
@@ -116,6 +130,16 @@ function AddExpenses({
           <button
             className="px-[10px] py-[8px] rounded-[10px] bg-[#000000] text-[#ffffff]"
             onClick={() => {
+              const keys = Object.keys(formValues);
+              const isEmpty = keys?.filter((a) => !(formValues as any)[a]);
+
+              console.log(isEmpty);
+
+              if (isEmpty?.length > 0) {
+                console.log("There is an empty value");
+                setHasErr([...isEmpty]);
+                return;
+              }
               isEdit
                 ? updateExpense(data?.id, formValues)
                 : addExpenses({

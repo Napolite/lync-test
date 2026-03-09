@@ -71,7 +71,16 @@ function Dashboard() {
         </Tab>
         <Tab>
           <div>
-            <RecentExpenses data={expensesData?.slice(0, 5) || []} />
+            <RecentExpenses
+              data={
+                expensesData
+                  ?.sort(
+                    (a, b) =>
+                      new Date(b?.date).getTime() - new Date(a?.date).getTime(),
+                  )
+                  ?.slice(0, 5) || []
+              }
+            />
           </div>
         </Tab>
       </div>

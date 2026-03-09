@@ -11,5 +11,4 @@ utilities yelllow
 
 health purple
 
-//to-do
-Sort recent expenses by date
+add validation for empty fields
