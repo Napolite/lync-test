@@ -4,20 +4,30 @@ import Select from "../select";
 import { useState, type SetStateAction } from "react";
 
 import useServices from "../../database-services/useServices";
+import type { ExpensesDataType } from "../../constants/types";
 
 function AddExpenses({
   closeModal,
+  isEdit = false,
+  data,
 }: {
   closeModal: () => SetStateAction<any>;
+  isEdit?: boolean;
+  data?: ExpensesDataType & { id: number | any };
 }) {
-  const { addExpenses } = useServices();
+  const { addExpenses, updateExpense } = useServices();
 
   const [formValues, setFormValues] = useState<{
-    amount: number;
+    amount: number | null;
     category: string;
     description: string;
     date: string | any;
-  }>({ amount: 0, category: "", description: "", date: "" });
+  }>({
+    amount: data?.amount || null,
+    category: data?.category || "Food",
+    description: data?.description || "",
+    date: data?.date || "",
+  });
   return (
     <div className="fixed w-full min-h-full bg-[#00000080] top-0 left-0 flex items-center justify-center overflow-auto">
       <div className="bg-[white] w-[500px] min-h-[500px] px-[23px] py-[20px] rounded-[20px]">
@@ -44,6 +54,7 @@ function AddExpenses({
                   amount: Number(e.target.value),
                 })
               }
+              value={formValues?.amount || undefined}
             />
           </div>
           <div className="flex flex-col gap-y-[5px]">
@@ -63,6 +74,7 @@ function AddExpenses({
               onSelect={(value) => {
                 setFormValues((prev) => ({ ...prev, category: value }));
               }}
+              value={formValues?.category}
             />
           </div>
           <div className="flex flex-col gap-y-[5px]">
@@ -75,6 +87,7 @@ function AddExpenses({
                   description: e.target.value,
                 })
               }
+              value={formValues?.description}
             />
           </div>
           <div className="flex flex-col gap-y-[5px]">
@@ -89,20 +102,31 @@ function AddExpenses({
                   date: e.target.value,
                 })
               }
+              value={formValues?.date}
             />
           </div>
         </div>
         <div className="flex justify-end gap-x-[20px] mt-[30px]">
-          <button className="px-[10px] py-[8px] rounded-[10px] bg-[#ffffff] ring">
+          <button
+            className="px-[10px] py-[8px] rounded-[10px] bg-[#ffffff] ring"
+            onClick={closeModal}
+          >
             Cancel
           </button>
           <button
             className="px-[10px] py-[8px] rounded-[10px] bg-[#000000] text-[#ffffff]"
             onClick={() => {
-              addExpenses(formValues).then(() => {});
+              isEdit
+                ? updateExpense(data?.id, formValues)
+                : addExpenses({
+                    ...formValues,
+                    amount: (formValues?.amount as number) || 0,
+                  }).then(() => {
+                    closeModal();
+                  });
             }}
           >
-            Add Expenses
+            {!isEdit ? " Add Expenses" : "Edit Expense"}
           </button>
         </div>
       </div>

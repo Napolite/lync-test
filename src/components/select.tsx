@@ -5,11 +5,13 @@ import { BiCaretDown } from "react-icons/bi";
 const Select = ({
   options,
   onSelect,
+  value,
 }: {
   options?: string[];
   onSelect?: (val: any) => any;
+  value?: any;
 }) => {
-  const [selection, setSelection] = useState(options?.[0]);
+  const [selection, setSelection] = useState(value || options?.[0]);
 
   const [dropOpen, setDropOpen] = useState(false);
 
