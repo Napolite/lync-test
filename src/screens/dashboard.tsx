@@ -4,8 +4,14 @@ import GraphComponent from "../components/graphComponent";
 import RecentExpenses from "../components/recentExpenses";
 import Table from "../components/tableComponent";
 import Select from "../components/select";
+import { useEffect } from "react";
+import useServices from "../database-services/useServices";
 
 function Dashboard() {
+  const { expensesData } = useServices();
+  useEffect(() => {
+    console.log(expensesData);
+  }, [expensesData]);
   return (
     <div className="w-[70%] mx-auto min-h-[100vh]">
       <div className="flex w-full justify-between gap-x-[40px] mt-[40px]">
@@ -54,7 +60,7 @@ function Dashboard() {
         </Tab>
         <Tab>
           <div>
-            <RecentExpenses />
+            <RecentExpenses data={expensesData?.slice(0, 5) || []} />
           </div>
         </Tab>
       </div>

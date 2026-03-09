@@ -11,6 +11,7 @@ function AddExpenses({
   closeModal: () => SetStateAction<any>;
 }) {
   const { addExpenses } = useServices();
+
   const [formValues, setFormValues] = useState<{
     amount: number;
     category: string;
@@ -37,6 +38,12 @@ function AddExpenses({
             <input
               type="number"
               className="w-full h-[50px] bg-[rgba(128,128,128,0.2)] rounded-[10px] px-[10px]"
+              onChange={(e) =>
+                setFormValues({
+                  ...formValues,
+                  amount: Number(e.target.value),
+                })
+              }
             />
           </div>
           <div className="flex flex-col gap-y-[5px]">
@@ -60,7 +67,15 @@ function AddExpenses({
           </div>
           <div className="flex flex-col gap-y-[5px]">
             <label className="">Description</label>
-            <textarea className="w-full h-[75px] bg-[rgba(128,128,128,0.2)] rounded-[10px] px-[10px] py-[10px]" />
+            <textarea
+              className="w-full h-[75px] bg-[rgba(128,128,128,0.2)] rounded-[10px] px-[10px] py-[10px]"
+              onChange={(e) =>
+                setFormValues({
+                  ...formValues,
+                  description: e.target.value,
+                })
+              }
+            />
           </div>
           <div className="flex flex-col gap-y-[5px]">
             <label className="">Date</label>
@@ -68,6 +83,12 @@ function AddExpenses({
               aria-label="Date"
               type="date"
               className="w-full h-[50px] bg-[rgba(128,128,128,0.2)] rounded-[10px] px-[10px]"
+              onChange={(e) =>
+                setFormValues({
+                  ...formValues,
+                  date: e.target.value,
+                })
+              }
             />
           </div>
         </div>
@@ -78,7 +99,9 @@ function AddExpenses({
           <button
             className="px-[10px] py-[8px] rounded-[10px] bg-[#000000] text-[#ffffff]"
             onClick={() => {
-              addExpenses(formValues);
+              addExpenses(formValues).then(() => {
+                console.log("expenses have been added to database");
+              });
             }}
           >
             Add Expenses

@@ -2,12 +2,9 @@ import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "./services";
 
 function useServices() {
+  const expensesData = useLiveQuery(() => db?.expenses?.toArray());
+
   //added this line for clarity
-  const getExpenses = () => {
-    const data = useLiveQuery(() => db?.expenses?.toArray());
-    if (data) return data;
-    else return null;
-  };
 
   const addExpenses = async (data: {
     date: string;
@@ -20,7 +17,7 @@ function useServices() {
     return id;
   };
 
-  return { addExpenses, getExpenses };
+  return { addExpenses, expensesData };
 }
 
 export default useServices;

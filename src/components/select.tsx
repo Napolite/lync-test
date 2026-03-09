@@ -7,7 +7,7 @@ const Select = ({
   onSelect,
 }: {
   options?: string[];
-  onSelect: (val: any) => any;
+  onSelect?: (val: any) => any;
 }) => {
   const [selection, setSelection] = useState(options?.[0]);
 
@@ -23,6 +23,7 @@ const Select = ({
           <button
             onClick={() => {
               setSelection(opt);
+              if (onSelect) onSelect(opt);
               setDropOpen(false);
             }}
             key={opt}

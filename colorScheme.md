@@ -10,3 +10,6 @@ Shopping : green0: oklch(.845 .143 164.978);
 utilities yelllow
 
 health purple
+
+//to-do
+Sort recent expenses by date
