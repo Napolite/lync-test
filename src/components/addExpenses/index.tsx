@@ -58,9 +58,13 @@ function AddExpenses({
                 setHasErr(hasErr?.filter((a) => a !== "amount"));
               }}
               value={formValues?.amount || undefined}
+              min={0}
             />
             {hasErr?.includes("amount") && (
               <p className="text-[red]">Amount cannot be empty</p>
+            )}
+            {((formValues?.amount as number) || 0) < 0 && (
+              <p className="text-[red]">Amount cannot be less than 0</p>
             )}
           </div>
           <div className="flex flex-col gap-y-[5px]">
@@ -140,6 +144,7 @@ function AddExpenses({
                 setHasErr([...isEmpty]);
                 return;
               }
+              if (((formValues?.amount as number) || 0) < 0) return;
               isEdit
                 ? updateExpense(data?.id, formValues)
                 : addExpenses({

@@ -25,28 +25,38 @@ function App() {
         />
       </div>
       {openBudget && (
-        <div className="w-[70%] mx-auto flex justify-end items-center gap-x-[5px]">
-          <input
-            type="number"
-            className="w-[220px] h-[30px] bg-[rgba(128,128,128,0.2)] rounded-[5px] px-[10px]"
-            onChange={(e) => {
-              setBudget(Number(e.target.value));
-            }}
-            value={(nBudget as number) || undefined}
-          />
-          <button
-            className="h-[30px] bg-[#000000] rounded-[8px] flex items-center justify-between px-[15px] text-[#ffffff]"
-            onClick={() => {
-              updateBudget((nBudget as number) || 0).then(() => {
-                setOpenBudget(false);
-              });
-            }}
-            disabled={!nBudget}
-            style={{ background: !nBudget ? "gray" : "#000000" }}
-          >
-            Set budget
-          </button>
-        </div>
+        <>
+          <div className="w-[70%] mx-auto flex justify-end items-start gap-x-[5px]">
+            <div className="relative">
+              <input
+                type="number"
+                className="w-[220px] h-[30px] bg-[rgba(128,128,128,0.2)] rounded-[5px] px-[10px]"
+                onChange={(e) => {
+                  setBudget(Number(e.target.value));
+                }}
+                value={(nBudget as number) || undefined}
+              />
+              {((nBudget as number) || 0) < 0 && (
+                <p className="text-[red] absolute">
+                  Amount cannot be less than 0
+                </p>
+              )}
+            </div>
+            <button
+              className="h-[30px] bg-[#000000] rounded-[8px] flex items-center justify-between px-[15px] text-[#ffffff]"
+              onClick={() => {
+                if ((nBudget as number) < 0) return;
+                updateBudget((nBudget as number) || 0).then(() => {
+                  setOpenBudget(false);
+                });
+              }}
+              disabled={!nBudget}
+              style={{ background: !nBudget ? "gray" : "#000000" }}
+            >
+              Set budget
+            </button>
+          </div>
+        </>
       )}
       <Dashboard />
       {openAddExpenseModal && (
