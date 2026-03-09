@@ -8,9 +8,9 @@ import { useEffect } from "react";
 import useServices from "../database-services/useServices";
 
 function Dashboard() {
-  const { expensesData } = useServices();
+  const { expensesData, totalExpenses } = useServices();
   useEffect(() => {
-    console.log(expensesData);
+    console.log(totalExpenses);
   }, [expensesData]);
   return (
     <div className="w-[70%] mx-auto min-h-[100vh]">
@@ -21,8 +21,10 @@ function Dashboard() {
             <DollarSign size={18} />
           </div>
           <div>
-            <p className="text-[24px]">$1168.73</p>
-            <p className="text-[12px]">Across 14 transactions</p>
+            <p className="text-[24px]">${totalExpenses}</p>
+            <p className="text-[12px]">
+              Across {expensesData?.length} transactions
+            </p>
           </div>
         </Tab>
         <Tab>
@@ -41,7 +43,9 @@ function Dashboard() {
             <DollarSign size={18} />
           </div>
           <div>
-            <p className="text-[24px]">$83.48</p>
+            <p className="text-[24px]">
+              ${((totalExpenses || 1) / (expensesData?.length || 1)).toFixed(2)}
+            </p>
             <p className="text-[12px]">Per transactions</p>
           </div>
         </Tab>

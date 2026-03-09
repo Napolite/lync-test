@@ -3,6 +3,15 @@ import { db } from "./services";
 
 function useServices() {
   const expensesData = useLiveQuery(() => db?.expenses?.toArray());
+  const totalExpenses = useLiveQuery(() =>
+    db?.expenses?.toArray()?.then((data) =>
+      data
+        ?.map((d) => d?.amount)
+        .reduce((accumulator, currentValue) => {
+          return accumulator + currentValue;
+        }, 0),
+    ),
+  );
 
   //added this line for clarity
 
@@ -17,7 +26,7 @@ function useServices() {
     return id;
   };
 
-  return { addExpenses, expensesData };
+  return { addExpenses, expensesData, totalExpenses };
 }
 
 export default useServices;
