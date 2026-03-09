@@ -38,7 +38,7 @@ function Dashboard() {
               className="text-[24px] font-bold"
               style={{
                 color:
-                  (budget?.amount || 0) > (totalMonthlyExpenses || 0)
+                  (budget?.amount || 0) >= (totalMonthlyExpenses || 0)
                     ? "green"
                     : "red",
               }}
@@ -49,11 +49,11 @@ function Dashboard() {
               {`
            ${Math.abs((budget?.amount || 0) - (totalMonthlyExpenses || 0))}
               ${
-                (budget?.amount || 0) < (totalMonthlyExpenses || 0)
+                (budget?.amount || 0) <= (totalMonthlyExpenses || 0)
                   ? "more"
                   : "less"
               }
-              than your budget( $${budget?.amount})`}
+              than your budget( $${budget?.amount || 0})`}
             </p>
           </div>
         </Tab>
