@@ -9,7 +9,8 @@ import useServices from "../database-services/useServices";
 import type { ExpensesDataType } from "../constants/types";
 
 function Dashboard() {
-  const { expensesData, totalExpenses, totalMonthlyExpenses } = useServices();
+  const { expensesData, totalExpenses, totalMonthlyExpenses, budget } =
+    useServices();
   const [filter, setFilter] = useState("");
   const [query, setQuery] = useState("");
   return (
@@ -33,8 +34,27 @@ function Dashboard() {
             <Calendar size={18} />
           </div>
           <div>
-            <p className="text-[24px]">${totalMonthlyExpenses}</p>
-            <p className="text-[12px]">$100 more than your budget</p>
+            <p
+              className="text-[24px] font-bold"
+              style={{
+                color:
+                  (budget?.amount || 0) > (totalMonthlyExpenses || 0)
+                    ? "green"
+                    : "red",
+              }}
+            >
+              ${totalMonthlyExpenses}
+            </p>
+            <p className="text-[12px]">
+              {`
+           ${Math.abs((budget?.amount || 0) - (totalMonthlyExpenses || 0))}
+              ${
+                (budget?.amount || 0) < (totalMonthlyExpenses || 0)
+                  ? "more"
+                  : "less"
+              }
+              than your budget( $${budget?.amount})`}
+            </p>
           </div>
         </Tab>
         <Tab>
