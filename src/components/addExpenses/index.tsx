@@ -6,6 +6,13 @@ import { useState, type SetStateAction } from "react";
 import useServices from "../../database-services/useServices";
 import type { ExpensesDataType } from "../../constants/types";
 
+interface FormValueType {
+  amount: number | null;
+  category: string;
+  description: string;
+  date: string | any;
+}
+
 function AddExpenses({
   closeModal,
   isEdit = false,
@@ -19,12 +26,7 @@ function AddExpenses({
 
   const [hasErr, setHasErr] = useState<string[]>([]);
 
-  const [formValues, setFormValues] = useState<{
-    amount: number | null;
-    category: string;
-    description: string;
-    date: string | any;
-  }>({
+  const [formValues, setFormValues] = useState<FormValueType>({
     amount: data?.amount || null,
     category: data?.category || "Food",
     description: data?.description || "",
@@ -135,12 +137,11 @@ function AddExpenses({
             className="px-[10px] py-[8px] rounded-[10px] bg-[#000000] text-[#ffffff]"
             onClick={() => {
               const keys = Object.keys(formValues);
-              const isEmpty = keys?.filter((a) => !(formValues as any)[a]);
-
-              console.log(isEmpty);
+              const isEmpty = keys?.filter(
+                (a) => !(formValues as FormValueType)[a as keyof FormValueType],
+              );
 
               if (isEmpty?.length > 0) {
-                console.log("There is an empty value");
                 setHasErr([...isEmpty]);
                 return;
               }

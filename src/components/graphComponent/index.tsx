@@ -13,7 +13,6 @@ import { CATEGORY_COLORS } from "../../constants/constants";
 // #region Sample data
 // #endregion
 const StackedBarChart = ({ data }: { data: ExpensesDataType[] }) => {
-  console.log(composeDataForGraph(data), "daaaaaaaata it surrounds me");
   return (
     <BarChart
       style={{
